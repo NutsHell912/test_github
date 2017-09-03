@@ -2,7 +2,6 @@ package com.test.nutshell.start;
 
 import com.test.nutshell.base.BasePresenter;
 
-import org.jetbrains.annotations.NotNull;
 
 import javax.inject.Inject;
 
@@ -22,13 +21,13 @@ public class StartPresenter<V extends StartMVP.View, I extends StartMVP.Interact
     private Disposable userDisposable;
 
     @Inject
-    public StartPresenter(@NotNull I mvpInteractor) {
+    public StartPresenter(@NonNull I mvpInteractor) {
         super(mvpInteractor);
         this.userDisposable = Disposables.disposed();
     }
 
     @Override
-    public void onAttach(@NotNull V mvpView) {
+    public void onAttach(@NonNull V mvpView) {
         super.onAttach(mvpView);
         getInteractor().restoreState();
         render();

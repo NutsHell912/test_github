@@ -1,16 +1,17 @@
 package com.test.nutshell.di.module;
 
 
+import android.arch.persistence.room.Room;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.support.annotation.NonNull;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.test.nutshell.data.db.RepoDatabase;
 import com.test.nutshell.data.db.Storage;
 import com.test.nutshell.data.model.User;
 import com.test.nutshell.data.network.ApiService;
-
-import org.jetbrains.annotations.NotNull;
 
 import java.io.IOException;
 
@@ -31,7 +32,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public final class ServiceModule {
     @Provides
     @Singleton
-    @NotNull
+    @NonNull
     public final Gson provideGson() {
         return new GsonBuilder()
                 .enableComplexMapKeySerialization()
@@ -40,8 +41,8 @@ public final class ServiceModule {
 
     @Provides
     @Singleton
-    @NotNull
-    public final OkHttpClient provideHttpClient(@NotNull final Storage storage) {
+    @NonNull
+    public final OkHttpClient provideHttpClient(@NonNull final Storage storage) {
         OkHttpClient.Builder builder = new OkHttpClient.Builder();
         builder.addInterceptor(
                 new Interceptor() {
@@ -49,8 +50,7 @@ public final class ServiceModule {
                     public Response intercept(Chain chain) throws IOException {
                         Request request = chain.request();
                         User user = storage.getUser();
-                        if(user != null && !user.getName().equals("") &&
-                                !user.getPassword().equals("")) {
+                        if (!user.getName().equals("") && !user.getPassword().equals("")) {
                             String credentials = Credentials.basic(user.getName(),
                                     user.getPassword());
                             Request authenticatedRequest = request.newBuilder()
@@ -69,8 +69,8 @@ public final class ServiceModule {
 
     @Provides
     @Singleton
-    @NotNull
-    public final ApiService provideApiService(@NotNull OkHttpClient httpClient, @NotNull Gson gson) {
+    @NonNull
+    public final ApiService provideApiService(@NonNull OkHttpClient httpClient, @NonNull Gson gson) {
         return new retrofit2.Retrofit.Builder()
                 .baseUrl("https://api.github.com/")
                 .client(httpClient)
@@ -81,10 +81,18 @@ public final class ServiceModule {
     }
 
     @Provides
-    @NotNull
+    @NonNull
     @Singleton
-    public final SharedPreferences provideSharedPreferences(@NotNull Context context) {
-        return context.getSharedPreferences("pref",Context.MODE_PRIVATE);
+    public final SharedPreferences provideSharedPreferences(@NonNull Context context) {
+        return context.getSharedPreferences("pref", Context.MODE_PRIVATE);
+    }
+
+    @Provides
+    @NonNull
+    @Singleton
+    public final RepoDatabase provideRepoDatabase(@NonNull Context context) {
+        return Room.databaseBuilder(context, RepoDatabase.class, RepoDatabase.DATABASE_NAME)
+        .allowMainThreadQueries().build();
     }
 
 }

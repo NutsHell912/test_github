@@ -2,35 +2,35 @@ package com.test.nutshell.di.module;
 
 import android.app.Application;
 import android.content.Context;
+import android.support.annotation.NonNull;
 
-import org.jetbrains.annotations.NotNull;
 
 import dagger.Module;
 import dagger.Provides;
 
 @Module
 public final class ApplicationModule {
-    @NotNull
+    @NonNull
     private final Application application;
 
     @Provides
-    @NotNull
+    @NonNull
     public final Context provideContext() {
         return this.application;
     }
 
     @Provides
-    @NotNull
+    @NonNull
     public final Application provideApplication() {
         return this.application;
     }
 
-    @NotNull
+    @NonNull
     public final Application getApplication() {
         return this.application;
     }
 
-    public ApplicationModule(@NotNull Application application) {
+    public ApplicationModule(@NonNull Application application) {
         this.application = application;
     }
 }

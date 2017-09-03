@@ -21,7 +21,6 @@ import com.test.nutshell.R;
 import com.test.nutshell.base.BaseActivity;
 import com.test.nutshell.search.SearchActivity;
 
-import org.jetbrains.annotations.NotNull;
 
 import javax.inject.Inject;
 
@@ -180,7 +179,7 @@ public class StartActivity extends BaseActivity implements StartMVP.View {
     }
 
     @Override
-    public void showError(@NotNull String msg) {
+    public void showError(@NonNull String msg) {
         disableProgress();
         Toast.makeText(this, msg, Toast.LENGTH_LONG).show();
     }

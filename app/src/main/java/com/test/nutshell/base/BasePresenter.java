@@ -1,7 +1,8 @@
 package com.test.nutshell.base;
 
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 
 import javax.inject.Inject;
 
@@ -11,7 +12,7 @@ public class BasePresenter<V extends MvpView, I extends MvpInteractor> implement
     private V mvpView;
     private I mvpInteractor;
 
-    public void onAttach(@NotNull V mvpView) {
+    public void onAttach(@NonNull V mvpView) {
         this.mvpView = mvpView;
     }
 
@@ -24,13 +25,13 @@ public class BasePresenter<V extends MvpView, I extends MvpInteractor> implement
         return this.mvpView;
     }
 
-    @NotNull
+    @NonNull
     public I getInteractor() {
         return this.mvpInteractor;
     }
 
     @Inject
-    public BasePresenter(@NotNull I mvpInteractor) {
+    public BasePresenter(@NonNull I mvpInteractor) {
         this.mvpInteractor = mvpInteractor;
     }
 }

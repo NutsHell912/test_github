@@ -1,16 +1,16 @@
 package com.test.nutshell.search;
 
 
+import android.support.annotation.NonNull;
+
 import com.test.nutshell.base.BasePresenter;
 import com.test.nutshell.data.model.Repo;
 
-import org.jetbrains.annotations.NotNull;
 
 import javax.inject.Inject;
 
 import io.reactivex.Completable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.annotations.NonNull;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.disposables.Disposables;
 import io.reactivex.functions.Action;
@@ -25,14 +25,14 @@ public class SearchPresenter<V extends SearchMVP.View, I extends SearchMVP.Inter
 
 
     @Inject
-    public SearchPresenter(@NotNull I mvpInteractor) {
+    public SearchPresenter(@NonNull I mvpInteractor) {
         super(mvpInteractor);
         this.repoDisposable = Disposables.disposed();
         this.repoNextDisposable = Disposables.disposed();
     }
 
     @Override
-    public void onAttach(@NotNull V mvpView) {
+    public void onAttach(@NonNull V mvpView) {
         super.onAttach(mvpView);
         mvpView.setRefreshing(true);
         loadRepos();
@@ -63,7 +63,7 @@ public class SearchPresenter<V extends SearchMVP.View, I extends SearchMVP.Inter
     }
 
     @Override
-    public void bindItemView(@NotNull SearchAdapter.ViewHolder holder, int position) {
+    public void bindItemView(@NonNull SearchAdapter.ViewHolder holder, int position) {
         Repo repo = (this.getInteractor()).getRepo(position);
         holder.renderFullName(repo.getFullName());
         holder.renderDescription(repo.getDescription());

@@ -3,6 +3,7 @@ package com.test.nutshell.search;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.view.MenuItemCompat;
 import android.support.v4.widget.SwipeRefreshLayout;
@@ -19,7 +20,6 @@ import com.test.nutshell.R;
 import com.test.nutshell.base.BaseActivity;
 import com.test.nutshell.start.StartActivity;
 
-import org.jetbrains.annotations.NotNull;
 
 import javax.inject.Inject;
 
@@ -88,7 +88,7 @@ public class SearchActivity extends BaseActivity implements SearchMVP.View {
             logoutItem.setVisible(false);
         }
         MenuItem searchItem = menu.findItem(R.id.action_search);
-        final SearchView searchView = (SearchView) MenuItemCompat.getActionView(searchItem);
+        final SearchView searchView = (SearchView) searchItem.getActionView();
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
@@ -144,7 +144,7 @@ public class SearchActivity extends BaseActivity implements SearchMVP.View {
     }
 
     @Override
-    public void showError(@NotNull String msg) {
+    public void showError(@NonNull String msg) {
         Toast.makeText(this, msg, Toast.LENGTH_LONG).show();
     }
 

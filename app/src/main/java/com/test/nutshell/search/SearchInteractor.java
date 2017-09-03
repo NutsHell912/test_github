@@ -1,11 +1,12 @@
 package com.test.nutshell.search;
 
+import android.support.annotation.NonNull;
+
 import com.test.nutshell.base.BaseInteractor;
 import com.test.nutshell.data.db.Storage;
 import com.test.nutshell.data.model.Repo;
 import com.test.nutshell.data.network.ApiServiceHelper;
 
-import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,7 +14,6 @@ import java.util.List;
 import javax.inject.Inject;
 
 import io.reactivex.Completable;
-import io.reactivex.annotations.NonNull;
 import io.reactivex.functions.Consumer;
 
 public class SearchInteractor extends BaseInteractor implements SearchMVP.Interactor {
@@ -23,22 +23,22 @@ public class SearchInteractor extends BaseInteractor implements SearchMVP.Intera
 
 
     @Inject
-    public SearchInteractor(@NotNull ApiServiceHelper apiServiceHelper, @NotNull Storage storage) {
+    public SearchInteractor(@NonNull ApiServiceHelper apiServiceHelper, @NonNull Storage storage) {
         super();
         this.apiServiceHelper = apiServiceHelper;
         this.storage = storage;
         this.repos = new ArrayList<Repo>();
     }
 
-    @NotNull
+    @NonNull
     @Override
     public Repo getRepo(int position) {
         return this.repos.get(position);
     }
 
-    @NotNull
+    @NonNull
     @Override
-    public Completable loadNewRepos(@NotNull String query) {
+    public Completable loadNewRepos(@NonNull String query) {
         storage.putQuery(query);
         return apiServiceHelper.getRepos(query)
                 .doOnSuccess(new Consumer<List<Repo>>() {
@@ -63,7 +63,7 @@ public class SearchInteractor extends BaseInteractor implements SearchMVP.Intera
         repos = storage.getRepos();
     }
 
-    @NotNull
+    @NonNull
     @Override
     public Completable loadNextRepos() {
         if (repos.size() > 0) {
@@ -82,7 +82,7 @@ public class SearchInteractor extends BaseInteractor implements SearchMVP.Intera
         }
     }
 
-    @NotNull
+    @NonNull
     @Override
     public Completable loadCurrentRepos() {
         repos = storage.getRepos();

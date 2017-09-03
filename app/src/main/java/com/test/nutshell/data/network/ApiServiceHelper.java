@@ -2,7 +2,6 @@ package com.test.nutshell.data.network;
 
 import com.test.nutshell.data.model.Repo;
 
-import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,25 +16,25 @@ import io.reactivex.functions.Function;
 public final class ApiServiceHelper {
     private final ApiService apiService;
 
-    @NotNull
+    @NonNull
     public Completable signIn() {
         return this.apiService.signIn();
     }
 
-    @NotNull
+    @NonNull
     public final Single<List<Repo>> getRepos(String query) {
         return getRepos(query, 1);
     }
 
-    @NotNull
+    @NonNull
     public final Single<List<Repo>> getRepos(String query, int page) {
         return apiService.getRepos(query, page)
                 .map(new Function<RepoDtoFull, List<Repo>>() {
                     @Override
                     public List<Repo> apply(@NonNull RepoDtoFull repoDtofull) throws Exception {
                         List<Repo> repos = new ArrayList<>();
-                        List<RepoDto> repoDtos = repoDtofull.getItems();
-                        for (RepoDto repoDto : repoDtos) {
+                        List<RepoDtoFull.RepoDto> repoDtos = repoDtofull.getItems();
+                        for (RepoDtoFull.RepoDto repoDto : repoDtos) {
                             repos.add(new Repo(repoDto));
                         }
                         return repos;
@@ -45,7 +44,7 @@ public final class ApiServiceHelper {
 
 
     @Inject
-    public ApiServiceHelper(@NotNull ApiService apiService) {
+    public ApiServiceHelper(@NonNull ApiService apiService) {
         this.apiService = apiService;
     }
 }

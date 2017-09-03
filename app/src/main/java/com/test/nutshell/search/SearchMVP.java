@@ -1,12 +1,13 @@
 package com.test.nutshell.search;
 
+import android.support.annotation.NonNull;
+
 import com.test.nutshell.base.MvpInteractor;
 import com.test.nutshell.base.MvpPresenter;
 import com.test.nutshell.base.MvpView;
 import com.test.nutshell.data.model.Repo;
 import com.test.nutshell.di.PerActivity;
 
-import org.jetbrains.annotations.NotNull;
 
 import io.reactivex.Completable;
 
@@ -16,16 +17,16 @@ public interface SearchMVP {
 
 
         void restoreState();
-        @NotNull
+        @NonNull
         Repo getRepo(int position);
 
-        @NotNull
+        @NonNull
         Completable loadNextRepos();
 
-        @NotNull
+        @NonNull
         Completable loadCurrentRepos();
 
-        @NotNull
+        @NonNull
         Completable loadNewRepos(String query);
 
         void logout();
@@ -42,7 +43,7 @@ public interface SearchMVP {
         boolean isLogin();
         void onNextRepoLoad();
 
-        void bindItemView(@NotNull SearchAdapter.ViewHolder holder, int position);
+        void bindItemView(@NonNull SearchAdapter.ViewHolder holder, int position);
 
         int getRepoId(int position);
 
@@ -65,13 +66,13 @@ public interface SearchMVP {
 
         void renderList();
 
-        void showError(@NotNull String msg);
+        void showError(@NonNull String msg);
     }
 
     public interface ItemView {
-        void renderFullName(@NotNull String fullName);
-        void renderDescription(@NotNull String description);
+        void renderFullName(@NonNull String fullName);
+        void renderDescription(@NonNull String description);
 
-        void renderAvatart(@NotNull String url);
+        void renderAvatart(@NonNull String url);
     }
 }

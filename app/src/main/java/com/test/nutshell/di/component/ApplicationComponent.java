@@ -11,7 +11,6 @@ import com.test.nutshell.data.network.ApiServiceHelper;
 import com.test.nutshell.di.module.ApplicationModule;
 import com.test.nutshell.di.module.ServiceModule;
 
-import org.jetbrains.annotations.NotNull;
 
 import javax.inject.Singleton;
 
@@ -22,12 +21,12 @@ import dagger.Component;
         modules = {ApplicationModule.class, ServiceModule.class}
 )
 public interface ApplicationComponent {
-    void inject(@NotNull App var1);
+    void inject(@NonNull App var1);
 
-    @NotNull
+    @NonNull
     Context context();
 
-    @NotNull
+    @NonNull
     Application application();
 
     @NonNull

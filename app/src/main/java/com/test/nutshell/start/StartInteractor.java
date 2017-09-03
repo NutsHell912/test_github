@@ -7,7 +7,6 @@ import com.test.nutshell.data.db.Storage;
 import com.test.nutshell.data.model.User;
 import com.test.nutshell.data.network.ApiServiceHelper;
 
-import org.jetbrains.annotations.NotNull;
 
 import javax.inject.Inject;
 
@@ -23,7 +22,7 @@ public class StartInteractor extends BaseInteractor implements StartMVP.Interact
     private String password = "";
 
     @Inject
-    public StartInteractor(@NotNull ApiServiceHelper apiServiceHelper, @NotNull Storage storage) {
+    public StartInteractor(@NonNull ApiServiceHelper apiServiceHelper, @NonNull Storage storage) {
         super();
         this.apiServiceHelper = apiServiceHelper;
         this.storage = storage;

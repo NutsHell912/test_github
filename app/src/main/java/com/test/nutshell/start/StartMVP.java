@@ -8,7 +8,6 @@ import com.test.nutshell.base.MvpPresenter;
 import com.test.nutshell.base.MvpView;
 import com.test.nutshell.di.PerActivity;
 
-import org.jetbrains.annotations.NotNull;
 
 import io.reactivex.Completable;
 
@@ -34,7 +33,7 @@ public class StartMVP {
     }
 
     public interface View extends MvpView {
-        void showError(@NotNull String msg);
+        void showError(@NonNull String msg);
         void showAuthError();
         void navigateToSearch();
         void renderProgress();
